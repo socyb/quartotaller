@@ -1,12 +1,35 @@
 ---
-title: "Geopolítica Internacional"
-author: Jorge Cardiel
-format: dashboard
+title: "Gráfica de emisiones de CO₂"
+format: html
+execute:
+  echo: true
 ---
 
-# Caso 1
-Los gasoductos Nordstream
+## Gráfica de emisiones de CO₂ con Matplotlib
 
-# Caso 2
+```{python}
+# Importar las bibliotecas necesarias
+import pandas as pd
+import matplotlib.pyplot as plt
 
-Taiwan y los semiconductores
+# Cargar los datos del archivo CSV
+# Asegúrate de que el archivo CSV esté en la misma carpeta o especifica la ruta completa
+archivo_csv = "co2.csv"
+datos = pd.read_csv(archivo_csv)
+
+# Filtrar los datos si es necesario (ejemplo: solo para el mundo)
+datos_mundo = datos[datos['Entity'] == 'World']
+
+# Crear la gráfica
+plt.figure(figsize=(10, 6))
+plt.plot(datos_mundo['Year'], datos_mundo['Annual CO₂ emissions'], marker='o', linestyle='-', label='Emisiones de CO₂')
+
+# Personalizar la gráfica
+plt.title('Emisiones anuales de CO₂ (Mundo)', fontsize=14)
+plt.xlabel('Año', fontsize=12)
+plt.ylabel('Emisiones de CO₂', fontsize=12)
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.legend()
+
+# Mostrar la gráfica
+plt.show()
